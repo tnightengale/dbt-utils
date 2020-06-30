@@ -3,13 +3,75 @@ This [dbt](https://github.com/fishtown-analytics/dbt) package contains macros th
 ## Installation Instructions
 Check [dbt Hub](https://hub.getdbt.com/fishtown-analytics/dbt_utils/latest/) for the latest installation instructions, or [read the docs](https://docs.getdbt.com/docs/package-management) for more information on installing packages.
 
-----
+---
+## Contents
+Macros:
+* [Cross-database](#cross-database)
+    * [current_timestamp](#current_timestamp-source)
+    * [dateadd](#dateadd-source)
+    * [datediff](#datediff-source)
+    * [split_part](#split_part-source)
+    * [date_trunc](#date_trunc-source)
+    * [last_day](#last_day-source)
+    * [width_bucket](#width_bucket-source)
+
+* [Date/Time](#datetime)
+    * [date_spine](#date_spine-source)
+
+* [Geo](#geo)
+    * [haversine_distance](#haversine_distance-source)
+
+* [Schema Tests](#schema-tests)
+    * [equal_rowcount](#equal_rowcount-source)
+    * [equality](#equality-source)
+    * [expression_is_true](#expression_is_true-source)
+    * [recency](#recency-source)
+    * [at_least_one](#at_least_one-source)
+    * [not_constant](#not_constant-source)
+    * [cardinality_equality](#cardinality_equality-source)
+    * [unique_where](#unique_where-source)
+    * [not_null_where](#not_null_where-source)
+    * [relationships_where](#relationships_where-source)
+    * [mutually_exclusive_ranges](#mutually_exclusive_ranges-source)
+    * [unique_combination_of_columns](#unique_combination_of_columns-source)
+
+* [SQL helpers](#sql-helpers)
+    * [get_query_results_as_dict](#get_query_results_as_dict-source)
+    * [get_column_values](#get_column_values-source)
+    * [get_relations_by_prefix](#get_relations_by_prefix-source)
+    * [group_by](#group_by-source)
+    * [star](#star-source)
+    * [union_relations](#union_relations-source)
+    * [generate_series](#generate_series-source)
+    * [surrogate_key](#surrogate_key-source)
+    * [safe_add](#safe_add-source)
+    * [pivot](#pivot-source)
+    * [unpivot](#unpivot-source)
+
+* [Web](web)
+    * [get_url_parameter](#get_url_parameter-source)
+    * [get_url_host](#get_url_host-source)
+    * [get_url_path](#get_url_path-source)
+
+* [Logger](#logger)
+    * [pretty_time](#pretty_time-source)
+    * [pretty_log_format](#pretty_log_format-source)
+
+Materializations:
+    * [insert_by_period](#insert_by_period-source)
+
+---
 
 ## Macros
 ### Cross-database
-While these macros are cross database, they do not support all databases.
-These macros are provided to make date calculations easier and are not a core part of dbt.
-Most date macros are not supported on postgres.
+⚠️ These macros largely exist for two reasons:
+1. To make it easier to write other packages so that they work on multiple database (especially if syntaxes differ)
+2. To replicate functionality that does not exist on one database.
+
+Generally speaking, if your organization uses one database only, you should opt
+to use the native SQL of that database rather than using one of these macros.
+Using macros introduces an inherit tradeoff — they make your models more
+difficult for others to interpret.
 
 #### current_timestamp ([source](macros/cross_db_utils/current_timestamp.sql))
 This macro returns the current timestamp.
@@ -748,22 +810,6 @@ We welcome contributions to this repo! To contribute a new feature or a fix, ple
 
 ----
 
-### Getting started with dbt
-
-- [What is dbt]?
-- Read the [dbt viewpoint]
-- [Installation]
-- Join the [chat][slack-url] on Slack for live questions and support.
-
-
 ## Code of Conduct
 
-Everyone interacting in the dbt project's codebases, issue trackers, chat rooms, and mailing lists is expected to follow the [PyPA Code of Conduct].
-
-
-
-[PyPA Code of Conduct]: https://www.pypa.io/en/latest/code-of-conduct/
-[slack-url]: http://ac-slackin.herokuapp.com/
-[Installation]: https://dbt.readme.io/docs/installation
-[What is dbt]: https://dbt.readme.io/docs/overview
-[dbt viewpoint]: https://dbt.readme.io/docs/viewpoint
+Everyone interacting in the dbt project's codebases, issue trackers, chat rooms, and mailing lists is expected to follow the [dbt Community Code of Conduct](https://community.getdbt.com/code-of-conduct).
